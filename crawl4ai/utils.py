@@ -2001,6 +2001,9 @@ def normalize_url(href, base_url):
     if not parsed_base.scheme or not parsed_base.netloc:
         raise ValueError(f"Invalid base URL format: {base_url}")
 
+    if '.' in base_url.split('/')[-1]:
+        base_url = base_url.rsplit('/', 1)[0] + '/'
+
     # Ensure base_url ends with a trailing slash if it's a directory path
     if not base_url.endswith('/'):
         base_url = base_url + '/'
